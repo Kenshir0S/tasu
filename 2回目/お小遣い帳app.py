@@ -51,9 +51,7 @@ def create_inout():
         json.dump(json_datas, f, indent=4, ensure_ascii=False)
         
         
-def total_inout(kind, interval):
-    inout = []
-    
+def show_inout(kind, interval):
     with open(file_name, "r") as f:
         json_datas = json.load(f)
 
@@ -61,9 +59,7 @@ def total_inout(kind, interval):
         for data in json_datas:
             if not data:
                 continue
-            inout.append(data["price"])
-        total = sum(inout)
-        print(f"全体合計金額: ¥{total:,}")
+            print(data)
         
     if kind == 1:
         interval = datetime.strptime(interval, "%Y")
@@ -74,10 +70,7 @@ def total_inout(kind, interval):
             date = datetime.strptime(data["date"], "%Y-%m-%d")
             year = date.year
             if year == inter_year:
-                inout.append(data["price"])
-        total = sum(inout)
-        interval = interval.strftime("%Y年")
-        print(f"{interval}合計金額: ¥{total:,}")
+                print(data)
     
     if kind == 2:
         interval = datetime.strptime(interval, "%Y%m")
@@ -91,10 +84,7 @@ def total_inout(kind, interval):
             month = date.month
             if year == inter_year:
                 if month == inter_month:
-                    inout.append(data["price"])
-        total = sum(inout)
-        interval = interval.strftime("%Y年%m月")
-        print(f"{interval}合計金額: ¥{total:,}")
+                    print(data)
         
     if kind == 3:
         interval = datetime.strptime(interval, "%Y%m%d")
@@ -111,10 +101,7 @@ def total_inout(kind, interval):
             if year == inter_year:
                 if month == inter_month:
                     if day == inter_day:
-                        inout.append(data["price"])
-        total = sum(inout)
-        interval = interval.strftime("%Y年%m月%d日")
-        print(f"{interval}合計金額: ¥{total:,}")
+                        print(data)
         
     if kind == 4:
         for data in json_datas:
@@ -122,11 +109,9 @@ def total_inout(kind, interval):
                 continue
             cate = data["category"]
             if cate == interval:
-                inout.append(data["price"])
-        total = sum(inout)
-        print(f"{interval}合計金額: ¥{total:,}")
-                
-    
+                print(data)
+        
+        
 def edit_inout(id):
     id = int(id)
     with open(file_name, "r") as f:
@@ -201,8 +186,10 @@ def delete_inout(id):
                 
     print(f"id={id}を削除しました。")
 
-
-def show_inout(kind, interval):
+        
+def total_inout(kind, interval):
+    inout = []
+    
     with open(file_name, "r") as f:
         json_datas = json.load(f)
 
@@ -210,7 +197,9 @@ def show_inout(kind, interval):
         for data in json_datas:
             if not data:
                 continue
-            print(data)
+            inout.append(data["price"])
+        total = sum(inout)
+        print(f"全体合計金額: ¥{total:,}")
         
     if kind == 1:
         interval = datetime.strptime(interval, "%Y")
@@ -221,7 +210,10 @@ def show_inout(kind, interval):
             date = datetime.strptime(data["date"], "%Y-%m-%d")
             year = date.year
             if year == inter_year:
-                print(data)
+                inout.append(data["price"])
+        total = sum(inout)
+        interval = interval.strftime("%Y年")
+        print(f"{interval}合計金額: ¥{total:,}")
     
     if kind == 2:
         interval = datetime.strptime(interval, "%Y%m")
@@ -235,7 +227,10 @@ def show_inout(kind, interval):
             month = date.month
             if year == inter_year:
                 if month == inter_month:
-                    print(data)
+                    inout.append(data["price"])
+        total = sum(inout)
+        interval = interval.strftime("%Y年%m月")
+        print(f"{interval}合計金額: ¥{total:,}")
         
     if kind == 3:
         interval = datetime.strptime(interval, "%Y%m%d")
@@ -252,7 +247,10 @@ def show_inout(kind, interval):
             if year == inter_year:
                 if month == inter_month:
                     if day == inter_day:
-                        print(data)
+                        inout.append(data["price"])
+        total = sum(inout)
+        interval = interval.strftime("%Y年%m月%d日")
+        print(f"{interval}合計金額: ¥{total:,}")
         
     if kind == 4:
         for data in json_datas:
@@ -260,7 +258,9 @@ def show_inout(kind, interval):
                 continue
             cate = data["category"]
             if cate == interval:
-                print(data)
+                inout.append(data["price"])
+        total = sum(inout)
+        print(f"{interval}合計金額: ¥{total:,}")
 
 
 def main():
