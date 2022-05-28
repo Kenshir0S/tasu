@@ -31,15 +31,9 @@ def create_inout():
     while not price.isdigit():
         price = input("金額を入力してください。: ")
     if in_out == "1":
-        if int(price) < 0:
-            price = int(price)
-        else:
-            price = int(price) * -1
+        price = int(price) * -1
     else:
-        if int(price) < 0:
-            price = int(price) * -1
-        else:
-            price = int(price)
+        price = int(price)
     print(f"¥{price:,}")
         
     dic = {
