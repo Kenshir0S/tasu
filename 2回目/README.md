@@ -14,6 +14,10 @@ streamlit (numpy, pandas, matplotlibが必要)
 
 altair
 
+## アプリ起動コマンド
+
+streamlit run main.py
+
 ## 処理順序
 
 main.py (画面表示設定、初期jsonファイル作成)

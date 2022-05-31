@@ -11,8 +11,9 @@ def read():
         df = models.return_df(kind, interval)
         _, col = st.columns([2, 4.5])
         col.dataframe(df, width=1000)
-        chart_data = models.chart_data(df)
-        st.altair_chart(chart_data, use_container_width=True)
+        if "date" in df.keys():
+            chart_data = models.chart_data(df)
+            st.altair_chart(chart_data, use_container_width=True)
     
     elif  kind == 1:
         interval = st.text_input(label="年を入力してください", value="2022")
